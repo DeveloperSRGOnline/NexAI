@@ -1,6 +1,6 @@
-import apiClient from './apiClient';
+import apiClient from "./apiClient";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 /**
  * Initiates the Google OAuth 2.0 redirect flow
@@ -13,7 +13,7 @@ export const loginWithGoogle = () => {
  * Development mock login (active in non-production environments)
  */
 export const devLogin = async (payload = {}) => {
-  const response = await apiClient.post('/auth/dev-login', payload);
+  const response = await apiClient.post("/auth/dev-login", payload);
   return response.data;
 };
 
@@ -21,7 +21,7 @@ export const devLogin = async (payload = {}) => {
  * Fetch authenticated user profile
  */
 export const fetchCurrentUser = async () => {
-  const response = await apiClient.get('/auth/me', {
+  const response = await apiClient.get("/auth/me", {
     _skipAuthRedirect: true,
   });
   return response.data?.user;
@@ -32,8 +32,8 @@ export const fetchCurrentUser = async () => {
  */
 export const logoutUser = async () => {
   try {
-    await apiClient.post('/auth/logout');
+    await apiClient.post("/auth/logout");
   } catch (err) {
-    console.warn('[Auth] Server logout notification failed:', err.message);
+    console.warn("[Auth] Server logout notification failed:", err.message);
   }
 };

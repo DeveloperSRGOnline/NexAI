@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { 
-  MessageSquare, 
-  BookOpen, 
-  FileText, 
-  Sparkles, 
-  Settings, 
+import {
+  MessageSquare,
+  BookOpen,
+  FileText,
+  Sparkles,
+  Settings,
   Cpu,
   LogOut
 } from 'lucide-react';
@@ -44,9 +44,8 @@ export default function AppLayout() {
   return (
     <div className={styles.layout}>
       <aside
-        className={`${styles.layout__sidebar} ${
-          sidebarOpen ? styles['layout__sidebar--open'] : ''
-        }`}
+        className={`${styles.layout__sidebar} ${sidebarOpen ? styles['layout__sidebar--open'] : ''
+          }`}
       >
         <div className={styles.layout__brand}>
           <img src="/favicon.svg" alt="NexAI Logo" className={styles.layout__logo} />
@@ -63,9 +62,8 @@ export default function AppLayout() {
               <NavLink
                 key={item.path}
                 to={item.path}
-                className={`${styles.layout__navItem} ${
-                  isActive ? styles['layout__navItem--active'] : ''
-                }`}
+                className={`${styles.layout__navItem} ${isActive ? styles['layout__navItem--active'] : ''
+                  }`}
               >
                 <Icon size={18} />
                 <span>{item.label}</span>

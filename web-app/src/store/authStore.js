@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
-import { fetchCurrentUser, logoutUser } from '../lib/auth';
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { fetchCurrentUser, logoutUser } from "../lib/auth";
 
 const useAuthStore = create(
   devtools(
@@ -61,8 +61,8 @@ const useAuthStore = create(
         });
       },
     }),
-    { name: 'auth-store' }
-  )
+    { name: "auth-store" },
+  ),
 );
 
 export default useAuthStore;

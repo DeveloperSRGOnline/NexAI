@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { config } from './env.js';
+import mongoose from "mongoose";
+import { config } from "./env.js";
 
 let isConnected = false;
 
@@ -9,7 +9,9 @@ export const connectDB = async () => {
   }
 
   if (!config.mongodbUri) {
-    console.warn('[MongoDB] Warning: MONGODB_URI is not defined in environment variables. Database operations will be mocked or unavailable.');
+    console.warn(
+      "[MongoDB] Warning: MONGODB_URI is not defined in environment variables. Database operations will be mocked or unavailable.",
+    );
     return;
   }
 
@@ -23,18 +25,20 @@ export const connectDB = async () => {
     isConnected = true;
     console.log(`[MongoDB] Connected successfully: ${conn.connection.host}`);
 
-    mongoose.connection.on('error', (err) => {
-      console.error('[MongoDB] Runtime connection error:', err.message);
+    mongoose.connection.on("error", (err) => {
+      console.error("[MongoDB] Runtime connection error:", err.message);
       isConnected = false;
     });
 
-    mongoose.connection.on('disconnected', () => {
-      console.warn('[MongoDB] Disconnected. Reconnection will be attempted automatically.');
+    mongoose.connection.on("disconnected", () => {
+      console.warn(
+        "[MongoDB] Disconnected. Reconnection will be attempted automatically.",
+      );
       isConnected = false;
     });
 
-    mongoose.connection.on('reconnected', () => {
-      console.log('[MongoDB] Reconnected successfully.');
+    mongoose.connection.on("reconnected", () => {
+      console.log("[MongoDB] Reconnected successfully.");
       isConnected = true;
     });
   } catch (err) {

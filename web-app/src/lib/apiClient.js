@@ -1,8 +1,8 @@
-import axios from 'axios';
-import useAuthStore from '../store/authStore';
+import axios from "axios";
+import useAuthStore from "../store/authStore";
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
   withCredentials: true,
   timeout: 30000, // 30s accounts for Render cold start
 });
@@ -12,12 +12,15 @@ apiClient.interceptors.response.use(
   (err) => {
     if (err.response?.status === 401) {
       useAuthStore.getState().setUser(null);
-      if (!err.config?._skipAuthRedirect && window.location.pathname !== '/login') {
-        window.location.href = '/login';
+      if (
+        !err.config?._skipAuthRedirect &&
+        window.location.pathname !== "/login"
+      ) {
+        window.location.href = "/login";
       }
     }
     return Promise.reject(err);
-  }
+  },
 );
 
 export default apiClient;

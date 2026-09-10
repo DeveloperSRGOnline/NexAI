@@ -6,13 +6,13 @@
 
 ## Session Metadata
 
-| Field | Value |
-|---|---|
-| **Current Phase** | Phase 0 — Core MVP |
+| Field                      | Value                                          |
+| -------------------------- | ---------------------------------------------- |
+| **Current Phase**          | Phase 0 — Core MVP                             |
 | **Last Completed Feature** | Feature 02 — Google OAuth + JWT Authentication |
-| **Next Unit in Queue** | Feature 03 — Base App Shell & Sidebar |
-| **Known Blockers** | None |
-| **Last Updated** | 2026-09-10 |
+| **Next Unit in Queue**     | Feature 03 — Base App Shell & Sidebar          |
+| **Known Blockers**         | None                                           |
+| **Last Updated**           | 2026-09-10                                     |
 
 ---
 
@@ -145,11 +145,11 @@
 
 ## Completion Summary
 
-| Phase | Total Features | Completed | In Progress |
-|---|---|---|---|
-| 0 — Core MVP | 7 | 2 | 0 |
-| 1 — Differentiators | 4 | 0 | 0 |
-| 2 — Depth | 5 | 0 | 0 |
-| 3 — Power-User | 4 | 0 | 0 |
-| 4 — Extension | 5 | 0 | 0 |
-| **TOTAL** | **25** | **2** | **0** |
+| Phase               | Total Features | Completed | In Progress |
+| ------------------- | -------------- | --------- | ----------- |
+| 0 — Core MVP        | 7              | 2         | 0           |
+| 1 — Differentiators | 4              | 0         | 0           |
+| 2 — Depth           | 5              | 0         | 0           |
+| 3 — Power-User      | 4              | 0         | 0           |
+| 4 — Extension       | 5              | 0         | 0           |
+| **TOTAL**           | **25**         | **2**     | **0**       |

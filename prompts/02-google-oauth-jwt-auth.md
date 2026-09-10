@@ -1,9 +1,11 @@
 # Feature Spec 02 — Google OAuth + JWT Authentication
 
 ## Goal
+
 Implement secure, end-to-end authentication for NexAI using custom Google OAuth 2.0 and JWTs (HS256) stored in `httpOnly` cookies, supported by MongoDB Atlas user persistence, centralized auth middleware (`auth.middleware.js`), a reactive frontend auth state slice in Zustand (`authStore`), a reusable `<ProtectedRoute />` React wrapper, a dedicated `/login` page with Google OAuth trigger (and development fallback), and a session termination / logout pipeline.
 
 ## Skills / Docs Read
+
 - `AGENTS.md` (Agent Operating Harness: Decision 001 - Custom Google OAuth + JWT, free-tier discipline, security invariants)
 - `context/progress-tracker.md` (Feature 02 checklist items)
 - `context/memory.md` (Decision 001 — Custom Google OAuth + JWT vs Clerk for Chrome Extension sharing, Decision 005 — Render cold start)
@@ -13,6 +15,7 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 - `context/ui-tokens.md` (Dark theme tokens, typography, surface colors, button styles)
 
 ## Assumptions
+
 1. MongoDB connection will be managed via Mongoose in `server/src/config/db.js` with connection pooling, connecting on server start and handling reconnections gracefully without crashing Render instances.
 2. Google OAuth 2.0 flow is handled server-side via `google-auth-library` or standard OAuth redirect flow: frontend initiates navigation to `GET /auth/google`, backend redirects to Google's OAuth consent screen, Google calls back `GET /auth/google/callback?code=...`, backend exchanges code for user profile, upserts user in MongoDB `users` collection, issues a signed JWT, sets an `httpOnly`, `SameSite=Lax` cookie, and redirects the browser back to `${FRONTEND_URL}/`.
 3. To facilitate immediate local development, testing, and CI verification without requiring live Google Cloud Console credentials upfront, a development login route (`POST /auth/dev-login`) will be available in non-production (`NODE_ENV !== 'production'`), allowing instant mock authentication with test profiles.
@@ -22,6 +25,7 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 ## Exact Files to Modify / Create
 
 ### Backend (`server/`)
+
 - `server/package.json` [MODIFY] — Add `mongoose`, `jsonwebtoken`, `google-auth-library`
 - `server/src/config/db.js` [NEW] — MongoDB Mongoose connection manager with pooling and error handling
 - `server/src/models/User.js` [NEW] — Mongoose User model based on `context/data-models.md`
@@ -33,6 +37,7 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 - `server/src/config/env.js` [MODIFY] — Export complete auth configuration (`jwtSecret`, Google OAuth credentials, cookie options)
 
 ### Frontend (`web-app/`)
+
 - `web-app/src/lib/auth.js` [NEW] — Client auth helper functions (`loginWithGoogle`, `devLogin`, `logoutUser`, `fetchCurrentUser`)
 - `web-app/src/store/authStore.js` [MODIFY] — Upgrade store with `checkAuth`, `isCheckingAuth`, `logout`, and reactive state
 - `web-app/src/components/auth/ProtectedRoute.jsx` [NEW] — Route guard checking `isAuthenticated` and `isCheckingAuth`
@@ -41,10 +46,12 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 - `web-app/src/components/layout/AppLayout.jsx` [MODIFY] — Display user profile (avatar, name, email) and sign-out button in sidebar
 
 ### Progress & Memory Tracking
+
 - `context/progress-tracker.md` [MODIFY] — Update Feature 02 status and checklist
 - `context/memory.md` [MODIFY] — Log Feature 02 architectural notes and completion state
 
 ## Security & Auth Invariants
+
 1. **JWT Secret Protection**: `JWT_SECRET` must be read strictly from environment variables; fallback is provided for local dev only.
 2. **HttpOnly Cookie**: Auth cookie must be set with `httpOnly: true`, `sameSite: 'lax'`, `path: '/'`, and `secure: true` in production.
 3. **No Password Stored**: No passwords or Google refresh tokens are stored in the database.
@@ -52,6 +59,7 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 5. **No Token Leakage**: The JWT cookie is never accessible to client-side scripts via `document.cookie`.
 
 ## Acceptance Criteria
+
 - [ ] Backend dependencies installed (`mongoose`, `jsonwebtoken`, `google-auth-library`).
 - [ ] `User` model created adhering exactly to `context/data-models.md`.
 - [ ] `auth.middleware.js` verifies JWT from either `req.cookies.token` or `Authorization: Bearer <token>`, attaching `req.user`.
@@ -65,6 +73,7 @@ Implement secure, end-to-end authentication for NexAI using custom Google OAuth 
 - [ ] Logging out clears state and redirects back to `/login`.
 
 ## Manual / CLI Verification Test Steps
+
 1. Run `npm install` in `server/` to install `mongoose`, `jsonwebtoken`, `google-auth-library`.
 2. Start server (`npm run dev:server`) and verify `GET http://localhost:5000/auth/me` returns 401 Unauthorized.
 3. Test dev login via curl: `curl -X POST http://localhost:5000/auth/dev-login -H "Content-Type: application/json" -d '{"email":"test@nexai.app","name":"Demo User"}' -c cookies.txt` -> returns 200 with user payload and sets `token` cookie.

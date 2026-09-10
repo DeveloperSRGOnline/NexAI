@@ -1,26 +1,26 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
   googleRedirect,
   googleCallback,
   getCurrentUser,
   logout,
   devLogin,
-} from '../controllers/auth.controller.js';
-import authMiddleware from '../middleware/auth.middleware.js';
+} from "../controllers/auth.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = Router();
 
 // OAuth initiation & callback
-router.get('/google', googleRedirect);
-router.get('/google/callback', googleCallback);
+router.get("/google", googleRedirect);
+router.get("/google/callback", googleCallback);
 
 // Protected user endpoint
-router.get('/me', authMiddleware, getCurrentUser);
+router.get("/me", authMiddleware, getCurrentUser);
 
 // Session termination
-router.post('/logout', logout);
+router.post("/logout", logout);
 
 // Local developer mock login
-router.post('/dev-login', devLogin);
+router.post("/dev-login", devLogin);
 
 export default router;

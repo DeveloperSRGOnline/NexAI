@@ -66,16 +66,16 @@ The spec MUST contain all of the following sections:
 ## Manual / CLI Verification Test Steps
 ```
 
-4. **HALT** and present this message to the user:
+4. **Approval / Autonomous Transition**:
+   - **Interactive Mode**: HALT and present the spec review message. Wait for user approval (`y` or `proceed`).
+   - **Full-Access Mode (USER DIRECTED)**: If the user has granted full autonomous access ("no need to ask for confirmation for this project"), the agent records the spec to `prompts/XX-[feature-name].md` and immediately proceeds autonomously to Step 2 execution without halting.
 
-> "✅ I have generated the implementation spec at `prompts/XX-[feature-name].md`.
-> Please review it. Type **y** or **proceed** to execute."
-
-### Step 2 — Execution (ONLY AFTER EXPLICIT APPROVAL)
-- Only upon receiving explicit approval (`y`, `proceed`, or equivalent) may code be written
+### Step 2 — Execution
 - Mark the feature `[/] In Progress` in `context/progress-tracker.md` before starting
+- Execute implementation cleanly, following all tech stack and security invariants
+- Run automated verification tests / builds
 - Mark the feature `[x] Completed` in `context/progress-tracker.md` after finishing
-- Update `context/memory.md` with any decisions made or blockers encountered
+- Update `context/memory.md` with decisions made, test results, and carry-forward notes
 
 ---
 
