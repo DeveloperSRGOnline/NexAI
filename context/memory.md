@@ -10,7 +10,7 @@
 | ------------------- | --------------------------------------------------------------------------- |
 | **Session Start**   | 2026-09-10                                                                  |
 | **Phase**           | Phase 0 — Core MVP                                                          |
-| **Status**          | Feature 02 completed — ready to begin Feature 03 (Base App Shell & Sidebar) |
+| **Status**          | Feature 03 completed — ready to begin Feature 04 (Core Streaming Chat)     |
 | **Unfinished Work** | None                                                                        |
 
 ---
@@ -66,6 +66,13 @@
 - **Decision**: Enabled Full-Access mode per user instruction ("not need to ask for confirmation for this project only"). The agent continues to generate rigorous implementation specs in `prompts/` for auditability, but proceeds autonomously into execution without halting. Initialized `.env` and `.env.example` templates across both `server/` and `web-app/`.
 - **Reason**: Eliminates turn-by-turn interactive friction while maintaining zero-defect architecture and traceability.
 - **Impact**: Feature builds proceed continuously and autonomously end-to-end.
+
+### Decision 008 — Responsive Drawer & Mode-Filtered Navigation Architecture
+
+- **Date**: 2026-09-10
+- **Decision**: Implement responsive sidebar supporting three distinct viewport behaviors: full 240px desktop sidebar with collapse toggle, 56px icon-only rail for tablet (768px-1023px), and touch-dismissible off-canvas drawer with backdrop blur for mobile (<768px). Sidebar navigation dynamically adapts to active persona mode (`general`, `developer`, `student`, `power-user`) stored in `uiStore` with `localStorage` fallback.
+- **Reason**: Meets all criteria in `context/ui-rules.md` (Section 2) while preparing UX for developer utilities, study tools, document studio, and analytics across all device factors.
+- **Impact**: Seamless UX on desktop, tablet, and mobile; clean route resolution for all modes.
 
 ---
 

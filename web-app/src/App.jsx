@@ -8,6 +8,10 @@ import LibraryPage from './pages/Library/LibraryPage';
 import DocumentsPage from './pages/Documents/DocumentsPage';
 import PromptsPage from './pages/Prompts/PromptsPage';
 import SettingsPage from './pages/Settings/SettingsPage';
+import DevToolsPage from './pages/DevTools/DevToolsPage';
+import FocusPage from './pages/Focus/FocusPage';
+import AnalyticsPage from './pages/Analytics/AnalyticsPage';
+import SecurityPage from './pages/Security/SecurityPage';
 import useAuthStore from './store/authStore';
 
 export default function App() {
@@ -36,6 +40,10 @@ export default function App() {
         <Route path="library" element={<LibraryPage />} />
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="prompts" element={<PromptsPage />} />
+        <Route path="devtools" element={<DevToolsPage />} />
+        <Route path="focus" element={<FocusPage />} />
+        <Route path="analytics" element={<AnalyticsPage />} />
+        <Route path="security" element={<SecurityPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

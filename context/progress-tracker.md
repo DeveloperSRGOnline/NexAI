@@ -9,8 +9,8 @@
 | Field                      | Value                                          |
 | -------------------------- | ---------------------------------------------- |
 | **Current Phase**          | Phase 0 — Core MVP                             |
-| **Last Completed Feature** | Feature 02 — Google OAuth + JWT Authentication |
-| **Next Unit in Queue**     | Feature 03 — Base App Shell & Sidebar          |
+| **Last Completed Feature** | Feature 03 — Base App Shell & Sidebar          |
+| **Next Unit in Queue**     | Feature 04 — Core Streaming Chat               |
 | **Known Blockers**         | None                                           |
 | **Last Updated**           | 2026-09-10                                     |
 
@@ -38,12 +38,12 @@
   - [x] Protected route wrapper
   - [x] Logout endpoint
 
-- [ ] **Feature 03** — Base App Shell & Sidebar
-  - [ ] Persistent sidebar with mode switcher
-  - [ ] Mobile drawer behavior
-  - [ ] Tablet collapsed behavior
-  - [ ] Active page highlighting
-  - [ ] User avatar in sidebar footer
+- [x] **Feature 03** — Base App Shell & Sidebar
+  - [x] Persistent sidebar with mode switcher
+  - [x] Mobile drawer behavior
+  - [x] Tablet collapsed behavior
+  - [x] Active page highlighting
+  - [x] User avatar in sidebar footer
 
 - [ ] **Feature 04** — Core Streaming Chat
   - [ ] `POST /chat/message` with SSE streaming
@@ -147,9 +147,9 @@
 
 | Phase               | Total Features | Completed | In Progress |
 | ------------------- | -------------- | --------- | ----------- |
-| 0 — Core MVP        | 7              | 2         | 0           |
+| 0 — Core MVP        | 7              | 3         | 0           |
 | 1 — Differentiators | 4              | 0         | 0           |
 | 2 — Depth           | 5              | 0         | 0           |
 | 3 — Power-User      | 4              | 0         | 0           |
 | 4 — Extension       | 5              | 0         | 0           |
-| **TOTAL**           | **25**         | **2**     | **0**       |
+| **TOTAL**           | **25**         | **3**     | **0**       |
