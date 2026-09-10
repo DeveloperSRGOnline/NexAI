@@ -168,18 +168,16 @@ export default function AppLayout() {
     <div className={styles.layout}>
       {/* Mobile Backdrop */}
       <div
-        className={`${styles.layout__backdrop} ${
-          sidebarOpen ? styles['layout__backdrop--visible'] : ''
-        }`}
+        className={`${styles.layout__backdrop} ${sidebarOpen ? styles['layout__backdrop--visible'] : ''
+          }`}
         onClick={() => setSidebarOpen(false)}
         aria-hidden="true"
       />
 
       {/* Sidebar */}
       <aside
-        className={`${styles.layout__sidebar} ${
-          sidebarOpen ? styles['layout__sidebar--open'] : ''
-        } ${sidebarCollapsed ? styles['layout__sidebar--collapsed'] : ''}`}
+        className={`${styles.layout__sidebar} ${sidebarOpen ? styles['layout__sidebar--open'] : ''
+          } ${sidebarCollapsed ? styles['layout__sidebar--collapsed'] : ''}`}
         aria-label="Application Navigation"
       >
         <div className={styles.layout__brand}>
@@ -222,9 +220,8 @@ export default function AppLayout() {
                   <NavLink
                     key={item.path}
                     to={item.path}
-                    className={`${styles.layout__navItem} ${
-                      isActive ? styles['layout__navItem--active'] : ''
-                    }`}
+                    className={`${styles.layout__navItem} ${isActive ? styles['layout__navItem--active'] : ''
+                      }`}
                     title={item.label}
                   >
                     <Icon size={18} className={styles.layout__navIcon} />

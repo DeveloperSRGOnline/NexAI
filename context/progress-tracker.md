@@ -6,13 +6,13 @@
 
 ## Session Metadata
 
-| Field                      | Value                                          |
-| -------------------------- | ---------------------------------------------- |
-| **Current Phase**          | Phase 0 — Core MVP                             |
-| **Last Completed Feature** | Feature 03 — Base App Shell & Sidebar          |
-| **Next Unit in Queue**     | Feature 04 — Core Streaming Chat               |
-| **Known Blockers**         | None                                           |
-| **Last Updated**           | 2026-09-10                                     |
+| Field                      | Value                                 |
+| -------------------------- | ------------------------------------- |
+| **Current Phase**          | Phase 0 — Core MVP                    |
+| **Last Completed Feature** | Feature 03 — Base App Shell & Sidebar |
+| **Next Unit in Queue**     | Feature 04 — Core Streaming Chat      |
+| **Known Blockers**         | None                                  |
+| **Last Updated**           | 2026-09-10                            |
 
 ---
 

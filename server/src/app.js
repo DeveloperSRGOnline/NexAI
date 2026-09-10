@@ -61,18 +61,19 @@ app.use(notFoundHandler);
 // Centralized error handler
 app.use(errorHandler);
 
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 
 // Start server if executed directly as entrypoint
-const isDirectRun = process.argv[1] && (
-  fileURLToPath(import.meta.url) === process.argv[1] ||
-  fileURLToPath(import.meta.url).replace(/\\/g, '/') === process.argv[1].replace(/\\/g, '/')
-);
+const isDirectRun =
+  process.argv[1] &&
+  (fileURLToPath(import.meta.url) === process.argv[1] ||
+    fileURLToPath(import.meta.url).replace(/\\/g, "/") ===
+      process.argv[1].replace(/\\/g, "/"));
 
-if (isDirectRun && process.env.NODE_ENV !== 'test') {
+if (isDirectRun && process.env.NODE_ENV !== "test") {
   app.listen(config.port, () => {
     console.log(
-      `[NexAI Server] Running on http://localhost:${config.port} in ${config.nodeEnv} mode`
+      `[NexAI Server] Running on http://localhost:${config.port} in ${config.nodeEnv} mode`,
     );
   });
 }

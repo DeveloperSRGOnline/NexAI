@@ -10,6 +10,7 @@
 You are acting as a **Principal Full-Stack Software Engineer** on project NexAI.
 
 Your responsibilities:
+
 - Zero-defect architecture: every design decision must be traceable and explainable
 - Explicit security boundaries: auth, secrets, and data flows are never ambiguous
 - Diploma viva-defensible decisions: be ready to justify every library, pattern, and trade-off
@@ -19,26 +20,26 @@ Your responsibilities:
 
 ## 2. Tech Stack Lock — DO NOT DEVIATE
 
-| Layer | Locked Choice | Reason |
-|---|---|---|
-| Frontend Framework | React 18/19 + Vite | PRD-specified |
-| Styling | SCSS Modules | PRD-specified, no Tailwind |
-| State Management | Zustand (atomic slices) | PRD-specified |
-| PWA | Workbox (service worker) | PRD-specified |
-| Rich Text Editor | Tiptap | PRD-specified |
-| Backend Runtime | Node.js + Express | PRD-specified |
-| AI Models | **Gemini 2.0 Flash** (fast/default) + **Gemini 2.5 Pro** (complex/agentic) | ⚠️ Gemini 1.0 and 1.5 are shut down (404). Use only current models. |
-| AI Orchestration | LangGraph (Node.js) | PRD-specified |
-| Embeddings | Gemini Text Embeddings | PRD-specified |
-| Database | MongoDB Atlas M0 + Mongoose | PRD-specified |
-| Vector Search | Pinecone Starter | PRD-specified |
-| PDF Export | `pdf-lib` (pure JS) | PRD-specified — NO Puppeteer |
-| DOCX Export | `docx` npm package (pure JS) | PRD-specified — NO Puppeteer |
-| Auth | **Custom Google OAuth + JWT** | ⚠️ Intentional deviation from Clerk — the Chrome Extension companion must share the same JWT session. Clerk's session model is incompatible with extension token sharing. |
-| PWA Push | Web Push + VAPID | PRD-specified |
-| Client Encryption | Web Crypto API | PRD-specified |
-| Hosting: Frontend | Vercel Hobby | PRD-specified |
-| Hosting: Backend | Render free web service | PRD-specified |
+| Layer              | Locked Choice                                                              | Reason                                                                                                                                                                    |
+| ------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend Framework | React 18/19 + Vite                                                         | PRD-specified                                                                                                                                                             |
+| Styling            | SCSS Modules                                                               | PRD-specified, no Tailwind                                                                                                                                                |
+| State Management   | Zustand (atomic slices)                                                    | PRD-specified                                                                                                                                                             |
+| PWA                | Workbox (service worker)                                                   | PRD-specified                                                                                                                                                             |
+| Rich Text Editor   | Tiptap                                                                     | PRD-specified                                                                                                                                                             |
+| Backend Runtime    | Node.js + Express                                                          | PRD-specified                                                                                                                                                             |
+| AI Models          | **Gemini 2.0 Flash** (fast/default) + **Gemini 2.5 Pro** (complex/agentic) | ⚠️ Gemini 1.0 and 1.5 are shut down (404). Use only current models.                                                                                                       |
+| AI Orchestration   | LangGraph (Node.js)                                                        | PRD-specified                                                                                                                                                             |
+| Embeddings         | Gemini Text Embeddings                                                     | PRD-specified                                                                                                                                                             |
+| Database           | MongoDB Atlas M0 + Mongoose                                                | PRD-specified                                                                                                                                                             |
+| Vector Search      | Pinecone Starter                                                           | PRD-specified                                                                                                                                                             |
+| PDF Export         | `pdf-lib` (pure JS)                                                        | PRD-specified — NO Puppeteer                                                                                                                                              |
+| DOCX Export        | `docx` npm package (pure JS)                                               | PRD-specified — NO Puppeteer                                                                                                                                              |
+| Auth               | **Custom Google OAuth + JWT**                                              | ⚠️ Intentional deviation from Clerk — the Chrome Extension companion must share the same JWT session. Clerk's session model is incompatible with extension token sharing. |
+| PWA Push           | Web Push + VAPID                                                           | PRD-specified                                                                                                                                                             |
+| Client Encryption  | Web Crypto API                                                             | PRD-specified                                                                                                                                                             |
+| Hosting: Frontend  | Vercel Hobby                                                               | PRD-specified                                                                                                                                                             |
+| Hosting: Backend   | Render free web service                                                    | PRD-specified                                                                                                                                                             |
 
 ---
 
@@ -49,7 +50,9 @@ Your responsibilities:
 For every feature unit, follow this exact sequence:
 
 ### Step 1 — Spec Generation (ALWAYS FIRST)
+
 Before writing any code:
+
 1. Inspect existing files relevant to the feature
 2. Load `context/progress-tracker.md` and `context/memory.md`
 3. Generate an **Implementation Specification File** at `prompts/XX-[feature-name].md`
@@ -58,11 +61,17 @@ The spec MUST contain all of the following sections:
 
 ```markdown
 ## Goal
+
 ## Skills / Docs Read
+
 ## Assumptions
+
 ## Exact Files to Modify / Create
+
 ## Security & Auth Invariants
+
 ## Acceptance Criteria
+
 ## Manual / CLI Verification Test Steps
 ```
 
@@ -71,6 +80,7 @@ The spec MUST contain all of the following sections:
    - **Full-Access Mode (USER DIRECTED)**: If the user has granted full autonomous access ("no need to ask for confirmation for this project"), the agent records the spec to `prompts/XX-[feature-name].md` and immediately proceeds autonomously to Step 2 execution without halting.
 
 ### Step 2 — Execution
+
 - Mark the feature `[/] In Progress` in `context/progress-tracker.md` before starting
 - Execute implementation cleanly, following all tech stack and security invariants
 - Run automated verification tests / builds
@@ -88,6 +98,7 @@ Any agent action that **mutates stored data** must follow this lifecycle:
 3. **Confirm** — User explicitly approves before execution
 
 **Examples of mutations requiring this lifecycle:**
+
 - Saving/tagging a library item
 - Generating and saving document sections
 - Applying a prompt vault template to a chat
@@ -110,25 +121,27 @@ Any agent action that **mutates stored data** must follow this lifecycle:
 
 Never introduce, suggest, or scaffold any of the following:
 
-| Banned Feature | Reason |
-|---|---|
-| Multi-model marketplace (OpenAI, Anthropic, etc.) | Out of scope per PRD |
-| Paid subscription UI / Stripe integration | Out of scope per PRD |
-| Multi-tenant team collaboration | Out of scope per PRD |
-| Puppeteer / Playwright (server-side) | Crashes Render free-tier RAM |
-| Server-side plaintext secrets storage | Security violation |
-| Clerk or Auth.js | Incompatible with extension JWT sharing |
-| Sending unencrypted vault data to backend | Hard security invariant |
+| Banned Feature                                    | Reason                                  |
+| ------------------------------------------------- | --------------------------------------- |
+| Multi-model marketplace (OpenAI, Anthropic, etc.) | Out of scope per PRD                    |
+| Paid subscription UI / Stripe integration         | Out of scope per PRD                    |
+| Multi-tenant team collaboration                   | Out of scope per PRD                    |
+| Puppeteer / Playwright (server-side)              | Crashes Render free-tier RAM            |
+| Server-side plaintext secrets storage             | Security violation                      |
+| Clerk or Auth.js                                  | Incompatible with extension JWT sharing |
+| Sending unencrypted vault data to backend         | Hard security invariant                 |
 
 ---
 
 ## 7. Session State Continuity
 
 Before every session:
+
 1. Read `context/progress-tracker.md` — know what's done and what's next
 2. Read `context/memory.md` — recall decisions and blockers from past sessions
 
 After every feature unit:
+
 1. Update `context/progress-tracker.md`
 2. Update `context/memory.md` with any new decisions, breaking changes, or carry-forward items
 
@@ -215,4 +228,4 @@ nexai/
 
 ---
 
-*Last updated: Phase 0 initialization — context system generated.*
+_Last updated: Phase 0 initialization — context system generated._
