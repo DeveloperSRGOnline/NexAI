@@ -1,0 +1,27 @@
+{
+  "name": "nexai",
+  "version": "0.1.0",
+  "description": "NexAI - Personal AI Workspace (PWA)",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "server",
+    "web-app"
+  ],
+  "scripts": {
+    "dev:client": "npm --workspace=web-app run dev",
+    "dev:server": "npm --workspace=server run dev",
+    "build:client": "npm --workspace=web-app run build",
+    "start:server": "npm --workspace=server run start",
+    "install:all": "npm install"
+  },
+  "keywords": [
+    "ai",
+    "gemini",
+    "pwa",
+    "langgraph",
+    "rag"
+  ],
+  "author": "",
+  "license": "MIT"
+}

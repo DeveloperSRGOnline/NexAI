@@ -1,0 +1,57 @@
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
+import { config } from './config/env.js';
+import healthRoutes from './routes/health.routes.js';
+import { errorHandler, notFoundHandler } from './middleware/error.middleware.js';
+
+const app = express();
+
+// Security middleware
+app.use(helmet());
+
+// CORS configuration for local development and production
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      const allowedOrigins = [
+        config.frontendUrl,
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+      ];
+      if (allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
+        return callback(null, true);
+      }
+      return callback(new Error('Blocked by CORS policy'));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  })
+);
+
+// Body parsers
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(cookieParser());
+
+// Base health route directly and via health router
+app.use('/', healthRoutes);
+
+// Catch-all 404 handler
+app.use(notFoundHandler);
+
+// Centralized error handler
+app.use(errorHandler);
+
+// Start server if executed directly
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(config.port, () => {
+    console.log(`[NexAI Server] Running on http://localhost:${config.port} in ${config.nodeEnv} mode`);
+  });
+}
+
+export default app;
