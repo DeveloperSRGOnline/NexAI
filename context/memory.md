@@ -10,7 +10,7 @@
 |---|---|
 | **Session Start** | 2026-09-10 |
 | **Phase** | Phase 0 — Core MVP |
-| **Status** | Feature 01 completed — ready to begin Feature 02 (Google OAuth + JWT) |
+| **Status** | Feature 02 completed — ready to begin Feature 03 (Base App Shell & Sidebar) |
 | **Unfinished Work** | None |
 
 ---
@@ -47,6 +47,12 @@
 - **Decision**: `/health` endpoint responds instantly (no DB query); frontend shows "Waking up server..." skeleton; frontend retries once after 35 seconds
 - **Reason**: Render free-tier spins down after 15 minutes of inactivity. Cold starts take 30–60 seconds. This must be handled gracefully or users will think the app is broken.
 - **Impact**: First-time load experience is degraded but acceptable for a capstone/demo context.
+
+### Decision 006 — Dual Token Verification & Disconnect-Tolerant Mock Fallback
+- **Date**: 2026-09-10
+- **Decision**: `authMiddleware` accepts either `httpOnly` cookie (`req.cookies.token`) or `Authorization: Bearer <token>`. In non-production without live MongoDB, auth falls back immediately to an in-memory dev cache with `bufferCommands: false` on Mongoose.
+- **Reason**: Web client uses secure `httpOnly` cookies; Chrome Extension companion in Phase 4 uses `Authorization: Bearer` headers. Furthermore, developers or examiners running the project without an active MongoDB connection string will not experience 10-second Mongoose buffering timeouts or crashes.
+- **Impact**: Clean, unified auth middleware across both clients; instant local dev experience.
 
 ---
 

@@ -11,8 +11,8 @@ apiClient.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
-      useAuthStore.getState().logout();
-      if (window.location.pathname !== '/login') {
+      useAuthStore.getState().setUser(null);
+      if (!err.config?._skipAuthRedirect && window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
     }

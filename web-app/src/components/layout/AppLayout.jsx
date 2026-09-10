@@ -1,15 +1,17 @@
 import React from 'react';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   MessageSquare, 
   BookOpen, 
   FileText, 
   Sparkles, 
   Settings, 
-  Cpu
+  Cpu,
+  LogOut
 } from 'lucide-react';
 import styles from './AppLayout.module.scss';
 import useUiStore from '../../store/uiStore';
+import useAuthStore from '../../store/authStore';
 
 const navItems = [
   { path: '/chat', label: 'Chat', icon: MessageSquare },
@@ -21,7 +23,9 @@ const navItems = [
 
 export default function AppLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { sidebarOpen } = useUiStore();
+  const { user, logout } = useAuthStore();
 
   const getPageTitle = () => {
     const activeItem = navItems.find(
@@ -29,6 +33,13 @@ export default function AppLayout() {
     );
     return activeItem ? activeItem.label : 'Workspace';
   };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login', { replace: true });
+  };
+
+  const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : 'U';
 
   return (
     <div className={styles.layout}>
@@ -62,6 +73,33 @@ export default function AppLayout() {
             );
           })}
         </nav>
+
+        {user && (
+          <div className={styles.layout__userSection}>
+            <div className={styles.layout__userProfile}>
+              <div className={styles.layout__userAvatar}>
+                {user.avatar ? (
+                  <img src={user.avatar} alt={user.name || 'User Avatar'} />
+                ) : (
+                  userInitial
+                )}
+              </div>
+              <div className={styles.layout__userInfo}>
+                <span className={styles.layout__userName}>{user.name || 'User'}</span>
+                <span className={styles.layout__userEmail}>{user.email || ''}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className={styles.layout__logoutBtn}
+              title="Sign out"
+              aria-label="Sign out"
+            >
+              <LogOut size={16} />
+            </button>
+          </div>
+        )}
 
         <div className={styles.layout__footer}>
           <div className={styles.layout__status}>

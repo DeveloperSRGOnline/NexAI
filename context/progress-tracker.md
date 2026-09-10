@@ -9,8 +9,8 @@
 | Field | Value |
 |---|---|
 | **Current Phase** | Phase 0 — Core MVP |
-| **Last Completed Feature** | Feature 01 — Workspace Scaffolding & Base PWA Shell |
-| **Next Unit in Queue** | Feature 02 — Google OAuth + JWT Authentication |
+| **Last Completed Feature** | Feature 02 — Google OAuth + JWT Authentication |
+| **Next Unit in Queue** | Feature 03 — Base App Shell & Sidebar |
 | **Known Blockers** | None |
 | **Last Updated** | 2026-09-10 |
 
@@ -30,13 +30,13 @@
   - [x] Vercel `vercel.json`
   - [x] Basic routing (React Router v6)
 
-- [ ] **Feature 02** — Google OAuth + JWT Authentication
-  - [ ] Google OAuth 2.0 backend flow
-  - [ ] JWT issuance + `httpOnly` cookie
-  - [ ] `authMiddleware.js`
-  - [ ] Frontend auth state (Zustand `authStore`)
-  - [ ] Protected route wrapper
-  - [ ] Logout endpoint
+- [x] **Feature 02** — Google OAuth + JWT Authentication
+  - [x] Google OAuth 2.0 backend flow
+  - [x] JWT issuance + `httpOnly` cookie
+  - [x] `authMiddleware.js`
+  - [x] Frontend auth state (Zustand `authStore`)
+  - [x] Protected route wrapper
+  - [x] Logout endpoint
 
 - [ ] **Feature 03** — Base App Shell & Sidebar
   - [ ] Persistent sidebar with mode switcher
@@ -147,9 +147,9 @@
 
 | Phase | Total Features | Completed | In Progress |
 |---|---|---|---|
-| 0 — Core MVP | 7 | 1 | 0 |
+| 0 — Core MVP | 7 | 2 | 0 |
 | 1 — Differentiators | 4 | 0 | 0 |
 | 2 — Depth | 5 | 0 | 0 |
 | 3 — Power-User | 4 | 0 | 0 |
 | 4 — Extension | 5 | 0 | 0 |
-| **TOTAL** | **25** | **1** | **0** |
+| **TOTAL** | **25** | **2** | **0** |

@@ -3,10 +3,15 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { config } from './config/env.js';
+import { connectDB } from './config/db.js';
 import healthRoutes from './routes/health.routes.js';
+import authRoutes from './routes/auth.routes.js';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware.js';
 
 const app = express();
+
+// Initialize MongoDB connection asynchronously
+connectDB();
 
 // Security middleware
 app.use(helmet());
@@ -40,6 +45,9 @@ app.use(cookieParser());
 
 // Base health route directly and via health router
 app.use('/', healthRoutes);
+
+// Auth routes
+app.use('/auth', authRoutes);
 
 // Catch-all 404 handler
 app.use(notFoundHandler);
